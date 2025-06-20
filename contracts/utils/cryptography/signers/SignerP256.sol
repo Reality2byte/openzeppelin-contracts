@@ -6,7 +6,7 @@ import {AbstractSigner} from "./AbstractSigner.sol";
 import {P256} from "../P256.sol";
 
 /**
- * @dev Implementation of {AbstractSigner} using xref:api:utils#P256[P256] signatures.
+ * @dev Implementation of {AbstractSigner} using xref:api:utils/cryptography#P256[P256] signatures.
  *
  * For {Account} usage, a {_setSigner} function is provided to set the {signer} public key.
  * Doing so is easier for a factory, who is likely to use initializable clones of this contract.
@@ -29,6 +29,10 @@ abstract contract SignerP256 is AbstractSigner {
     bytes32 private _qy;
 
     error SignerP256InvalidPublicKey(bytes32 qx, bytes32 qy);
+
+    constructor(bytes32 qx, bytes32 qy) {
+        _setSigner(qx, qy);
+    }
 
     /**
      * @dev Sets the signer with a P256 public key. This function should be called during construction

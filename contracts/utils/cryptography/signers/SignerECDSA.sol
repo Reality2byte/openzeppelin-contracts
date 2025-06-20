@@ -6,7 +6,7 @@ import {AbstractSigner} from "./AbstractSigner.sol";
 import {ECDSA} from "../ECDSA.sol";
 
 /**
- * @dev Implementation of {AbstractSigner} using xref:api:utils#ECDSA[ECDSA] signatures.
+ * @dev Implementation of {AbstractSigner} using xref:api:utils/cryptography#ECDSA[ECDSA] signatures.
  *
  * For {Account} usage, a {_setSigner} function is provided to set the {signer} address.
  * Doing so is easier for a factory, who is likely to use initializable clones of this contract.
@@ -26,6 +26,10 @@ import {ECDSA} from "../ECDSA.sol";
  */
 abstract contract SignerECDSA is AbstractSigner {
     address private _signer;
+
+    constructor(address signerAddr) {
+        _setSigner(signerAddr);
+    }
 
     /**
      * @dev Sets the signer with the address of the native signer. This function should be called during construction
